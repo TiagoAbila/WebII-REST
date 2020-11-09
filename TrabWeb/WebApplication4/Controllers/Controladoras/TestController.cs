@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication4.Controllers
+namespace WebApplication4.Controllers.Controladoras
 {
     public class TestController : Controller
     {
