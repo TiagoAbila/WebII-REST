@@ -7,7 +7,7 @@ namespace WebApplication4.Controllers.Database
     {
         public DbSet<Orcamento> Orcamento { get; set; }
         public DbSet<Item> Item { get; set; }
-        public DbSet<ItemOrcamento> ItemOrcamento { get; set; }
+        public DbSet<ItemOrcamento> Orcamento_Item { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {

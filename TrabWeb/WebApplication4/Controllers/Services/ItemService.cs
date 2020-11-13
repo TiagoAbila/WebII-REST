@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using WebApplication4.Controllers.Database;
-using WebApplication4.Controllers.Dto;
 using WebApplication4.Model;
 
 namespace WebApplication4.Controllers.Services
@@ -28,24 +28,20 @@ namespace WebApplication4.Controllers.Services
             _db.SaveChanges();
         }
 
-        public List<ItemCadastroExibicaoDto> GetAll(int id)
+        public List<Item> GetAll()
         {
-            throw new System.NotImplementedException();
+            return _db.Item.ToList();
         }
 
-        public string GetById(int id)
+        public Item GetById(int id)
         {
-            return "Funciona!" + id;
+            return _db.Item.Find(id);
         }
 
         public void Update(Item item)
         {
-            throw new System.NotImplementedException();
-        }
-
-        ItemCadastroExibicaoDto IItemService.GetById(int id)
-        {
-            throw new System.NotImplementedException();
+            _db.Item.Update(item);
+            _db.SaveChanges();
         }
     }
 }

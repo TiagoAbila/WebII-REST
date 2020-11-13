@@ -34,7 +34,7 @@ namespace WebApplication4
 
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SistemaGerProjetos;Integrated Security=True;");
+                options.UseSqlServer("Server=(LocalDb)\\MSSQLLocalDB;Initial Catalog=Loja;");
             });
             services.AddServices();
 

@@ -7,9 +7,9 @@ namespace WebApplication4.DependencyInjection
     {
         public static IServiceCollection AddServices(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<IItemService, ItemService>();
-            serviceCollection.AddSingleton<IOrcamentoService, OrcamentoService>();
-            serviceCollection.AddSingleton<IItemOrcamentoService, ItemOrcamentoService>();
+            serviceCollection.AddScoped<IItemService, ItemService>();
+            serviceCollection.AddScoped<IOrcamentoService, OrcamentoService>();
+            serviceCollection.AddScoped<IItemOrcamentoService, ItemOrcamentoService>();
             return serviceCollection;
         }
     }

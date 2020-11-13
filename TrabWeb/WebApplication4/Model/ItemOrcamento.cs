@@ -2,6 +2,7 @@
 {
     public class ItemOrcamento
     {
+        public int Id { get; set; }
         public int OrcamentoId { get; set; }
         public virtual Orcamento Orcamento { get; set; }
         public int ItemId { get; set; }
