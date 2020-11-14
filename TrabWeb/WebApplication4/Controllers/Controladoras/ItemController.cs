@@ -5,6 +5,7 @@ using WebApplication4.Model;
 
 namespace WebApplication4.Controllers.Controladoras
 {
+    [Route("[controller]")]
     public class ItemController : Controller
     {
         private readonly IItemService _itemService;
@@ -20,28 +21,28 @@ namespace WebApplication4.Controllers.Controladoras
             return _itemService.GetById(id);
         }
 
-        [HttpPost("post")]
+        [HttpPost]
         public ActionResult Add([FromBody] Item item)
         {
             _itemService.Add(item);
             return Ok();
         }
 
-        [HttpPut("update")]
+        [HttpPut]
         public ActionResult Update([FromBody] Item item)
         {
             _itemService.Update(item);
             return Ok();
         }
 
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id}")]
         public ActionResult Delete([FromRoute] int id)
         {
             _itemService.Delete(id);
             return Ok();
         }
 
-        [HttpGet("all")]
+        [HttpGet]
         public ActionResult<List<Item>> GetAll()
         {
             return Ok(_itemService.GetAll());
