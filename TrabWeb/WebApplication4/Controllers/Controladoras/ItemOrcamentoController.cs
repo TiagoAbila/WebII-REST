@@ -9,8 +9,6 @@ namespace WebApplication4.Controllers.Controladoras
     public class ItemOrcamentoController : Controller
     {
         private readonly IItemOrcamentoService _itemOrcamentoService;
-        private readonly IItemService _itemService;
-        private readonly IOrcamentoService _orcamentoService;
 
         public ItemOrcamentoController(IItemOrcamentoService itemOrcamentoService)
         {
@@ -18,13 +16,9 @@ namespace WebApplication4.Controllers.Controladoras
         }
 
         [HttpGet("{id}")]
-        public ActionResult<ItemOrcamentoDTO> GetById([FromRoute] int id)
+        public ActionResult<ItemOrcamento> GetById([FromRoute] int id)
         {
-            ItemOrcamentoDTO itemOrcamentoDTO = new ItemOrcamentoDTO();
-            itemOrcamentoDTO = _itemOrcamentoService.GetById(id);
-            itemOrcamentoDTO.Item = _itemService.GetById(itemOrcamentoDTO.ItemOrcamento.ItemId);
-            itemOrcamentoDTO.Orcamento = _orcamentoService.GetById(itemOrcamentoDTO.ItemOrcamento.OrcamentoId);
-            return itemOrcamentoDTO;
+            return _itemOrcamentoService.GetById(id);
         }
 
         [HttpPost]
