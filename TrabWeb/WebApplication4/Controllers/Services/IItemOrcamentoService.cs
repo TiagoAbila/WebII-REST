@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using WebApplication4.Controllers.Services.Dto;
 using WebApplication4.Model;
 
 namespace WebApplication4.Controllers.Services
@@ -6,9 +7,9 @@ namespace WebApplication4.Controllers.Services
     public interface IItemOrcamentoService
     {
         ItemOrcamento GetById(int id);
-        void Add(ItemOrcamento itemOrcamento);
+        void Add(ItemOrcamentoDto itemOrcamento);
         void Delete(int id);
-        void Update(ItemOrcamento itemOrcamento);
+        void Update(ItemOrcamentoDto itemOrcamento);
         List<ItemOrcamento> GetAll();
     }
 }

@@ -7,11 +7,11 @@ namespace WebApplication4.Model
         public int Id { get; set; }
         public DateTime DataCadastro { get; set; }
         public DateTime DataFinalizacao { get; set; }
-        public double ValorTotalItens { get; set; }
-        public double DescontoItens { get; set; }
-        public double DescontoOrcamento { get; set; }
-        public double ValorOrcamento { get; set; }
-        public double LucroTotal { get; set; }
-        public double CustoTotal { get; set; }
+        public decimal ValorTotalItens { get; set; }
+        public decimal DescontoItens { get; set; }
+        public decimal DescontoOrcamento { get; set; }
+        public decimal ValorOrcamento { get; set; }
+        public decimal LucroTotal { get; set; }
+        public decimal CustoTotal { get; set; }
     }
 }

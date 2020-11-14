@@ -1,12 +1,12 @@
-﻿namespace WebApplication4.Model
+﻿using WebApplication4.Model;
+
+namespace WebApplication4.Controllers.Services.Dto
 {
-    public class ItemOrcamento
+    public class ItemOrcamentoDto
     {
         public int Id { get; set; }
         public int OrcamentoId { get; set; }
-        public virtual Orcamento Orcamento { get; set; }
         public int ItemId { get; set; }
-        public virtual Item Item { get; set; }
         public decimal Quantidade { get; set; }
         public decimal ValorTotal { get; set; }
         public decimal DescontoTotal { get; set; }

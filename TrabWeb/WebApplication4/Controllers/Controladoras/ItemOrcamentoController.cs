@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using WebApplication4.Controllers.Services;
+using WebApplication4.Controllers.Services.Dto;
 using WebApplication4.Model;
 
 namespace WebApplication4.Controllers.Controladoras
@@ -22,15 +23,16 @@ namespace WebApplication4.Controllers.Controladoras
         }
 
         [HttpPost]
-        public ActionResult Add([FromBody] ItemOrcamento itemOrcamento)
+        public ActionResult Add([FromBody] ItemOrcamentoDto itemOrcamento)
         {
             _itemOrcamentoService.Add(itemOrcamento);
             return Ok();
         }
 
         [HttpPut]
-        public ActionResult Update([FromBody] ItemOrcamento itemOrcamento)
+        public ActionResult Update([FromBody] ItemOrcamentoDto itemOrcamento)
         {
+
             _itemOrcamentoService.Update(itemOrcamento);
             return Ok();
         }

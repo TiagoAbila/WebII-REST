@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using WebApplication4.Controllers.Database;
+using WebApplication4.Controllers.Services.Dto;
 using WebApplication4.Model;
 
 namespace WebApplication4.Controllers.Services
@@ -14,8 +16,18 @@ namespace WebApplication4.Controllers.Services
             _db = db;
         }
 
-        public void Add(ItemOrcamento itemOrcamento)
+        public void Add(ItemOrcamentoDto itemOrcamentoDto)
         {
+            var itemOrcamento = new ItemOrcamento {
+                Id = itemOrcamentoDto.Id,
+                ItemId = itemOrcamentoDto.ItemId,
+                OrcamentoId = itemOrcamentoDto.OrcamentoId,
+                CustoTotal = itemOrcamentoDto.CustoTotal,
+                DescontoTotal = itemOrcamentoDto.DescontoTotal,
+                LucroTotal = itemOrcamentoDto.LucroTotal,
+                Quantidade = itemOrcamentoDto.Quantidade,
+                ValorTotal = itemOrcamentoDto.ValorTotal
+            };
             _db.Orcamento_Item.Add(itemOrcamento);
             _db.SaveChanges();
         }
@@ -30,7 +42,10 @@ namespace WebApplication4.Controllers.Services
 
         public List<ItemOrcamento> GetAll()
         {
-            return _db.Orcamento_Item.ToList();
+            return _db.Orcamento_Item
+                .Include(i => i.Item)
+                .Include(i => i.Orcamento)
+                .ToList();
         }
 
         public ItemOrcamento GetById(int id)
@@ -38,8 +53,19 @@ namespace WebApplication4.Controllers.Services
             return _db.Orcamento_Item.Find(id);
         }
 
-        public void Update(ItemOrcamento itemOrcamento)
+        public void Update(ItemOrcamentoDto itemOrcamentoDto)
         {
+            var itemOrcamento = new ItemOrcamento
+            {
+                Id = itemOrcamentoDto.Id,
+                ItemId = itemOrcamentoDto.ItemId,
+                OrcamentoId = itemOrcamentoDto.OrcamentoId,
+                CustoTotal = itemOrcamentoDto.CustoTotal,
+                DescontoTotal = itemOrcamentoDto.DescontoTotal,
+                LucroTotal = itemOrcamentoDto.LucroTotal,
+                Quantidade = itemOrcamentoDto.Quantidade,
+                ValorTotal = itemOrcamentoDto.ValorTotal
+            };
             _db.Orcamento_Item.Update(itemOrcamento);
             _db.SaveChanges();
         }
