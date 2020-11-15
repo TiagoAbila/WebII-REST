@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using WebApplication4.Controllers.Database;
@@ -19,7 +20,7 @@ namespace WebApplication4.Controllers.Services
         public void Add(ItemOrcamentoDto itemOrcamentoDto)
         {
             var itemOrcamento = new ItemOrcamento {
-                Id = itemOrcamentoDto.Id,
+                DataCadastro = DateTime.Now,
                 ItemId = itemOrcamentoDto.ItemId,
                 OrcamentoId = itemOrcamentoDto.OrcamentoId,
                 CustoTotal = itemOrcamentoDto.CustoTotal,
@@ -57,7 +58,6 @@ namespace WebApplication4.Controllers.Services
         {
             var itemOrcamento = new ItemOrcamento
             {
-                Id = itemOrcamentoDto.Id,
                 ItemId = itemOrcamentoDto.ItemId,
                 OrcamentoId = itemOrcamentoDto.OrcamentoId,
                 CustoTotal = itemOrcamentoDto.CustoTotal,
@@ -68,6 +68,11 @@ namespace WebApplication4.Controllers.Services
             };
             _db.Orcamento_Item.Update(itemOrcamento);
             _db.SaveChanges();
+        }
+
+        public List<ItemOrcamento> GetByOrcamentoId(int orcamentoId)
+        {
+            return _db.Orcamento_Item.Where(o => o.OrcamentoId == orcamentoId).ToList();
         }
     }
 }

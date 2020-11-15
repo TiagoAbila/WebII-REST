@@ -1,8 +1,11 @@
-﻿namespace WebApplication4.Model
+﻿using System;
+
+namespace WebApplication4.Model
 {
     public class ItemOrcamento
     {
         public int Id { get; set; }
+        public DateTime DataCadastro { get; set; }
         public int OrcamentoId { get; set; }
         public virtual Orcamento Orcamento { get; set; }
         public int ItemId { get; set; }

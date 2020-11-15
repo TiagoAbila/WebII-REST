@@ -1,10 +1,9 @@
-﻿using WebApplication4.Model;
+﻿using System;
 
 namespace WebApplication4.Controllers.Services.Dto
 {
     public class ItemOrcamentoDto
     {
-        public int Id { get; set; }
         public int OrcamentoId { get; set; }
         public int ItemId { get; set; }
         public decimal Quantidade { get; set; }

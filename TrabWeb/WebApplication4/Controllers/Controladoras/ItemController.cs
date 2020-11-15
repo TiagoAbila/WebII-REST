@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using WebApplication4.Controllers.Services;
+using WebApplication4.Controllers.Services.Dto;
 using WebApplication4.Model;
 
 namespace WebApplication4.Controllers.Controladoras
@@ -22,16 +24,16 @@ namespace WebApplication4.Controllers.Controladoras
         }
 
         [HttpPost]
-        public ActionResult Add([FromBody] Item item)
+        public ActionResult Add([FromBody] ItemDto itemDto)
         {
-            _itemService.Add(item);
+            _itemService.Add(itemDto);
             return Ok();
         }
 
-        [HttpPut]
-        public ActionResult Update([FromBody] Item item)
+        [HttpPut("{id}")]
+        public ActionResult Update([FromBody] ItemDto itemDto, [FromRoute] int id)
         {
-            _itemService.Update(item);
+            _itemService.Update(itemDto, id);
             return Ok();
         }
 
@@ -46,6 +48,18 @@ namespace WebApplication4.Controllers.Controladoras
         public ActionResult<List<Item>> GetAll()
         {
             return Ok(_itemService.GetAll());
+        }
+
+        [HttpGet("periodo")]
+        public ActionResult<List<Item>> GetByPeriodo([FromQuery] DateTime dataInicial, [FromQuery] DateTime dataFinal)
+        {
+            return Ok(_itemService.GetByPeriodo(dataInicial, dataFinal));
+        }
+
+        [HttpGet("tipo")]
+        public ActionResult<List<Item>> GetByTipo([FromQuery] char tipo)
+        {
+            return Ok(_itemService.GetByTipo(tipo));
         }
     }
 }

@@ -49,5 +49,11 @@ namespace WebApplication4.Controllers.Controladoras
         {
             return Ok(_itemOrcamentoService.GetAll());
         }
+
+        [HttpGet("orcamento/{orcamentoId}")]
+        public ActionResult<ItemOrcamento> GetByOrcamentoId([FromRoute] int orcamentoId)
+        {
+            return Ok(_itemOrcamentoService.GetByOrcamentoId(orcamentoId));
+        }
     }
 }

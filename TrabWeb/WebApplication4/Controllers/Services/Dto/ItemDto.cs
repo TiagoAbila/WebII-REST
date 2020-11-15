@@ -1,11 +1,7 @@
-﻿using System;
-
-namespace WebApplication4.Model
+﻿namespace WebApplication4.Controllers.Services.Dto
 {
-    public class Item
+    public class ItemDto
     {
-        public int Id { get; set; }
-        public DateTime DataCadastro { get; set; }
         public string Descricao { get; set; }
         public decimal ValorUnitario { get; set; }
         public decimal Custo { get; set; }

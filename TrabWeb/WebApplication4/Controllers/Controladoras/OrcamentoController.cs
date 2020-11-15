@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using WebApplication4.Controllers.Services;
+using WebApplication4.Controllers.Services.Dto;
 using WebApplication4.Model;
 
 namespace WebApplication4.Controllers.Controladoras
@@ -22,16 +24,16 @@ namespace WebApplication4.Controllers.Controladoras
         }
 
         [HttpPost]
-        public ActionResult Add([FromBody] Orcamento orcamento)
+        public ActionResult Add([FromBody] OrcamentoDto orcamentoDto)
         {
-            _orcamentoService.Add(orcamento);
+            _orcamentoService.Add(orcamentoDto);
             return Ok();
         }
 
-        [HttpPut]
-        public ActionResult Update([FromBody] Orcamento orcamento)
+        [HttpPut("{id}")]
+        public ActionResult Update([FromBody] OrcamentoDto orcamentoDto, [FromRoute] int id)
         {
-            _orcamentoService.Update(orcamento);
+            _orcamentoService.Update(orcamentoDto, id);
             return Ok();
         }
 
@@ -46,6 +48,12 @@ namespace WebApplication4.Controllers.Controladoras
         public ActionResult<List<Orcamento>> GetAll()
         {
             return Ok(_orcamentoService.GetAll());
+        }
+
+        [HttpGet("periodo")]
+        public ActionResult<List<Orcamento>> GetByPeriodo([FromQuery] DateTime dataInicial, [FromQuery] DateTime dataFinal)
+        {
+            return Ok(_orcamentoService.GetByPeriodo(dataInicial, dataFinal));
         }
     }
 }

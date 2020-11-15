@@ -11,5 +11,6 @@ namespace WebApplication4.Controllers.Services
         void Delete(int id);
         void Update(ItemOrcamentoDto itemOrcamento);
         List<ItemOrcamento> GetAll();
+        List<ItemOrcamento> GetByOrcamentoId(int orcamentoId);
     }
 }
