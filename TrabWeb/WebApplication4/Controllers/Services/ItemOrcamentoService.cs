@@ -31,6 +31,15 @@ namespace WebApplication4.Controllers.Services
             };
             _db.Orcamento_Item.Add(itemOrcamento);
             _db.SaveChanges();
+
+            var orcamento = _db.Orcamento.Find(itemOrcamento.OrcamentoId);
+            orcamento.DescontoItens = orcamento.DescontoItens + itemOrcamento.DescontoTotal;
+            orcamento.ValorTotalItens = orcamento.ValorTotalItens + itemOrcamento.ValorTotal;
+            orcamento.CustoTotal = orcamento.CustoTotal + itemOrcamento.CustoTotal;
+            orcamento.ValorOrcamento = orcamento.ValorTotalItens - orcamento.DescontoItens - orcamento.DescontoOrcamento;
+            orcamento.LucroTotal = orcamento.ValorOrcamento - orcamento.CustoTotal;
+            _db.Orcamento.Update(orcamento);
+            _db.SaveChanges();
         }
 
         public void Delete(int id)
@@ -67,6 +76,15 @@ namespace WebApplication4.Controllers.Services
                 ValorTotal = itemOrcamentoDto.ValorTotal
             };
             _db.Orcamento_Item.Update(itemOrcamento);
+            _db.SaveChanges();
+
+            var orcamento = _db.Orcamento.Find(itemOrcamento.OrcamentoId);
+            orcamento.DescontoItens = orcamento.DescontoItens + itemOrcamento.DescontoTotal;
+            orcamento.ValorTotalItens = orcamento.ValorTotalItens + itemOrcamento.ValorTotal;
+            orcamento.CustoTotal = orcamento.CustoTotal + itemOrcamento.CustoTotal;
+            orcamento.ValorOrcamento = orcamento.ValorTotalItens - orcamento.DescontoItens - orcamento.DescontoOrcamento;
+            orcamento.LucroTotal = orcamento.ValorOrcamento - orcamento.CustoTotal;
+            _db.Orcamento.Update(orcamento);
             _db.SaveChanges();
         }
 
