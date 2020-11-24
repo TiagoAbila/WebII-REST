@@ -19,6 +19,14 @@ namespace WebApplication4.Controllers.Services
 
         public void Add(ItemOrcamentoDto itemOrcamentoDto)
         {
+            var orcamento = _db.Orcamento.Find(itemOrcamentoDto.OrcamentoId);
+            if (orcamento == default)
+                throw new KeyNotFoundException("Orçamento não encontrado na base de dados.");
+
+            var item = _db.Item.Find(itemOrcamentoDto.ItemId);
+            if (item == default)
+                throw new KeyNotFoundException("Item não encontrado na base de dados.");
+
             var itemOrcamento = new ItemOrcamento {
                 DataCadastro = DateTime.Now,
                 ItemId = itemOrcamentoDto.ItemId,
@@ -32,7 +40,6 @@ namespace WebApplication4.Controllers.Services
             _db.Orcamento_Item.Add(itemOrcamento);
             _db.SaveChanges();
 
-            var orcamento = _db.Orcamento.Find(itemOrcamento.OrcamentoId);
             orcamento.DescontoItens = orcamento.DescontoItens + itemOrcamento.DescontoTotal;
             orcamento.ValorTotalItens = orcamento.ValorTotalItens + itemOrcamento.ValorTotal;
             orcamento.CustoTotal = orcamento.CustoTotal + itemOrcamento.CustoTotal;
@@ -45,6 +52,8 @@ namespace WebApplication4.Controllers.Services
         public void Delete(int id)
         {
             var itemOrcamento = _db.Orcamento_Item.Find(id);
+            if (itemOrcamento == default)
+                throw new KeyNotFoundException("Item de Orçamento não encontrado na base de dados.");
 
             _db.Orcamento_Item.Remove(itemOrcamento);
             _db.SaveChanges();
@@ -60,11 +69,23 @@ namespace WebApplication4.Controllers.Services
 
         public ItemOrcamento GetById(int id)
         {
-            return _db.Orcamento_Item.Find(id);
+            var itemOrcamento = _db.Orcamento_Item.Find(id);
+            if (itemOrcamento == default)
+                throw new KeyNotFoundException("Item de Orçamento não encontrado na base de dados.");
+
+            return itemOrcamento;
         }
 
         public void Update(ItemOrcamentoDto itemOrcamentoDto)
         {
+            var orcamento = _db.Orcamento.Find(itemOrcamentoDto.OrcamentoId);
+            if (orcamento == default)
+                throw new KeyNotFoundException("Orçamento não encontrado na base de dados.");
+
+            var item = _db.Item.Find(itemOrcamentoDto.ItemId);
+            if (item == default)
+                throw new KeyNotFoundException("Item não encontrado na base de dados.");
+
             var itemOrcamento = new ItemOrcamento
             {
                 ItemId = itemOrcamentoDto.ItemId,
@@ -78,7 +99,6 @@ namespace WebApplication4.Controllers.Services
             _db.Orcamento_Item.Update(itemOrcamento);
             _db.SaveChanges();
 
-            var orcamento = _db.Orcamento.Find(itemOrcamento.OrcamentoId);
             orcamento.DescontoItens = orcamento.DescontoItens + itemOrcamento.DescontoTotal;
             orcamento.ValorTotalItens = orcamento.ValorTotalItens + itemOrcamento.ValorTotal;
             orcamento.CustoTotal = orcamento.CustoTotal + itemOrcamento.CustoTotal;
@@ -90,6 +110,10 @@ namespace WebApplication4.Controllers.Services
 
         public List<ItemOrcamento> GetByOrcamentoId(int orcamentoId)
         {
+            var orcamento = _db.Orcamento.Find(orcamentoId);
+            if (orcamento == default)
+                throw new KeyNotFoundException("Orçamento não encontrado na base de dados.");
+
             return _db.Orcamento_Item.Where(o => o.OrcamentoId == orcamentoId).ToList();
         }
     }

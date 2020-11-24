@@ -21,13 +21,13 @@ namespace WebApplication4.Controllers.Services
             var orcamento = new Orcamento
             {
                 DataCadastro = DateTime.Now,
-                CustoTotal = orcamentoDto.CustoTotal,
                 DataFinalizacao = orcamentoDto.DataFinalizacao,
-                DescontoItens = orcamentoDto.DescontoItens,
                 DescontoOrcamento = orcamentoDto.DescontoOrcamento,
-                LucroTotal = orcamentoDto.LucroTotal,
-                ValorOrcamento = orcamentoDto.ValorOrcamento,
-                ValorTotalItens = orcamentoDto.ValorTotalItens
+                CustoTotal = 0,
+                DescontoItens = 0,
+                LucroTotal = 0,
+                ValorOrcamento = 0,
+                ValorTotalItens = 0
             };
 
             _db.Orcamento.Add(orcamento);
@@ -37,6 +37,8 @@ namespace WebApplication4.Controllers.Services
         public void Delete(int id)
         {
             var orcamento = _db.Orcamento.Find(id);
+            if (orcamento == default)
+                throw new KeyNotFoundException("Orçamento não encontrado na base de dados.");
 
             _db.Orcamento.Remove(orcamento);
             _db.SaveChanges();
@@ -49,20 +51,21 @@ namespace WebApplication4.Controllers.Services
 
         public Orcamento GetById(int id)
         {
-            return _db.Orcamento.Find(id);
+            var orcamento = _db.Orcamento.Find(id);
+            if (orcamento == default)
+                throw new KeyNotFoundException("Orçamento não encontrado na base de dados.");
+
+            return orcamento;
         }
 
         public void Update(OrcamentoDto orcamentoDto, int id)
         {
             var orcamento = _db.Orcamento.Find(id);
+            if (orcamento == default)
+                throw new KeyNotFoundException("Orçamento não encontrado na base de dados.");
 
-            orcamento.CustoTotal = orcamentoDto.CustoTotal;
             orcamento.DataFinalizacao = orcamentoDto.DataFinalizacao;
-            orcamento.DescontoItens = orcamentoDto.DescontoItens;
             orcamento.DescontoOrcamento = orcamentoDto.DescontoOrcamento;
-            orcamento.LucroTotal = orcamentoDto.LucroTotal;
-            orcamento.ValorOrcamento = orcamentoDto.ValorOrcamento;
-            orcamento.ValorTotalItens = orcamentoDto.ValorTotalItens;
 
             _db.Orcamento.Update(orcamento);
             _db.SaveChanges();

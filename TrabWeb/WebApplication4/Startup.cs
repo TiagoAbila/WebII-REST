@@ -40,7 +40,7 @@ namespace WebApplication4
 
             services.AddSwaggerGen(x =>
             {
-                x.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Teste API", Version = "v1" });
+                x.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Loja API", Version = "v1" });
             });
         }
 

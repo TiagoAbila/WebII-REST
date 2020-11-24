@@ -35,6 +35,8 @@ namespace WebApplication4.Controllers.Services
         public void Delete(int id)
         {
             var item = _db.Item.Find(id);
+            if (item == default)
+                throw new KeyNotFoundException("Item não encontrado na base de dados.");
 
             _db.Item.Remove(item);
             _db.SaveChanges();
@@ -47,12 +49,18 @@ namespace WebApplication4.Controllers.Services
 
         public Item GetById(int id)
         {
-            return _db.Item.Find(id);
+            var item = _db.Item.Find(id);
+            if (item == default)
+                throw new KeyNotFoundException("Item não encontrado na base de dados.");
+
+            return item;
         }
 
         public void Update(ItemDto itemDto, int id)
         {
             var item = _db.Item.Find(id);
+            if (item == default)
+                throw new KeyNotFoundException("Item não encontrado na base de dados.");
 
             item.Descricao = itemDto.Descricao;
             item.Custo = itemDto.Custo;
